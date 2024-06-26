@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Configure git user details
+      run: git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
+    - name: Clone oldj/SwitchHosts
+      run: git clone https://github.com/oldj/SwitchHosts
+    - name: Change dictionary
+      run: cd SwitchHosts
+    - name: Download npm packages
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Make
+      run: npm run make
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: SwitchHosts
+        path: dist/*
