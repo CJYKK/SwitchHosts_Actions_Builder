@@ -27,8 +27,6 @@ jobs:
         repository: SwitchHosts
         # Branch name (default: main)
         branch: master
-    - name: Change dictionary
-      run: cd SwitchHosts
     # - name: Use Node.js ${{ matrix.node-version }}
     #   uses: actions/setup-node@v3
     #   with:
@@ -39,11 +37,15 @@ jobs:
         cd SwitchHosts
         npm install
     - name: Build
-      run: npm run build
+      run: |
+        cd SwitchHosts
+        npm run build
     - name: Make
-      run: npm run make
+      run: |
+        cd SwitchHosts
+        npm run make
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v3
       with:
         name: SwitchHosts
-        path: dist/*
+        path: SwitchHosts/dist/*
