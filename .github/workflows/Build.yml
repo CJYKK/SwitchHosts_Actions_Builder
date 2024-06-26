@@ -36,6 +36,7 @@ jobs:
       run: |
         cd SwitchHosts
         npm install
+        npm install dmg-license
     - name: Build
       run: |
         cd SwitchHosts
@@ -44,7 +45,7 @@ jobs:
       run: |
         cd SwitchHosts
         npm run make
-    - name: Upload Build Artifact
+    - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: SwitchHosts
