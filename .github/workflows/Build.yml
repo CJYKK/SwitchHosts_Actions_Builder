@@ -29,11 +29,13 @@ jobs:
         branch: master
     - name: Change dictionary
       run: cd SwitchHosts
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+    - name: Download npm packages
+      run: npm install
     - name: Build
       run: npm run build
     - name: Make
