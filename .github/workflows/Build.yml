@@ -16,8 +16,17 @@ jobs:
     - uses: actions/checkout@v4
     - name: Configure git user details
       run: git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
-    - name: Clone oldj/SwitchHosts
-      run: git clone https://github.com/oldj/SwitchHosts
+    - name: Clone Github Repo
+      # You may pin to the exact commit or the version.
+      # uses: whyakari/github-repo-action@809aeef1050b89b6f64d36fb9893c5e9ceaecbba
+      uses: whyakari/github-repo-action@v3.1
+      with:
+        # Repository Owner
+        owner: oldj
+        # Repository name
+        repository: SwitchHosts
+        # Branch name (default: main)
+        branch: master
     - name: Change dictionary
       run: cd SwitchHosts
     - name: Use Node.js ${{ matrix.node-version }}
